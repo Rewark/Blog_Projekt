@@ -50,15 +50,16 @@
 
 
 // Überprüft, ob das Textfeld leer ist oder nicht
-    if(isset($_REQUEST["button"])){
-      $text = $_REQUEST['text'];
-      if(empty($_POST['text'])){
+    if(isset($_POST["button"])){
+      
+      if(empty($_POST['blog'])){
         echo "<p id ='text'>Bitte text feld ausfühlen</p>";
       }else{
+		$text1 = $_POST['blog'];
         $statement = $db->prepare("INSERT INTO blog(text ,userid) VALUES (?,?)");
-        $statement->bind_param("si", $text,$_SESSION['userid']);
+        $statement->bind_param("si", $text1,$_SESSION['userid']);
         $statement->execute();
-        $text = null;
+        //$text = null;
       }
     }
 
