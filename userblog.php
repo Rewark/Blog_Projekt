@@ -44,22 +44,21 @@
     
 
     echo '<form action="" method="post">
-    <textarea type="text" name="blog" class="form-control" id="exampleFormControlTextarea1"  rows="3" style="width:800px"></textarea> <br><br>
+    <textarea type="text" name="text" class="form-control" id="exampleFormControlTextarea1"  rows="3" style="width:800px"></textarea> <br><br>
     <input type="submit" name="button" value="Abschicken">
     </form>';
 
 
 // Überprüft, ob das Textfeld leer ist oder nicht
-    if(isset($_POST["button"])){
-      
-      if(empty($_POST['blog'])){
+    if(isset($_REQUEST["button"])){
+      $text = $_REQUEST['text'];
+      if(empty($_POST['text'])){
         echo "<p id ='text'>Bitte text feld ausfühlen</p>";
       }else{
-		$text1 = $_POST['blog'];
         $statement = $db->prepare("INSERT INTO blog(text ,userid) VALUES (?,?)");
-        $statement->bind_param("si", $text1,$_SESSION['userid']);
+        $statement->bind_param("si", $text,$_SESSION['userid']);
         $statement->execute();
-        //$text = null;
+        $text = null;
       }
     }
 
